@@ -1,5 +1,6 @@
 <script setup>
-import FileUploader from './components/FileUploader.vue';
+import { RouterLink, RouterView } from 'vue-router';
+
 import {
   HomeIcon
   , ArchiveBoxIcon
@@ -10,14 +11,14 @@ import {
 
 const iconMap = {
   home: HomeIcon,
-  archivo: ArchiveBoxIcon,
+  archivos: ArchiveBoxIcon,
   configuracion: Cog8ToothIcon,
   reportes: ChartBarIcon,
 }
 
 const menuItems = [
   { id: 1, text: 'Inicio', icon: 'home' },
-  { id: 2, text: 'Archivos', icon: 'archivo' },
+  { id: 2, text: 'Archivos', icon: 'archivos' },
   { id: 3, text: 'Configuración', icon: 'configuracion' },
   { id: 4, text: 'Reportes', icon: 'reportes' },
 ]
@@ -56,10 +57,10 @@ const menuItems = [
               <!-- Distintivo -->
               <span
                 class="hidden group-hover:block absolute right-0 top-0 h-full w-2 bg-blue-500 rounded-r-md transition-all duration-200"></span>
-              <a href="#" class="flex items-center px-2 py-3.5 hover:bg-gray-100 pl-9">
-                <component :is="iconMap[item.icon]" class="h-5 w-5" />
-                <span class="pl-2">{{ item.text }}</span>
-              </a>
+                <RouterLink :to="{ name: item.icon}" class="flex items-center px-2 py-3.5 hover:bg-gray-100 pl-9">
+                   <component :is="iconMap[item.icon]" class="h-5 w-5" />
+                  <span class="pl-2">{{ item.text }}</span>
+                </RouterLink>
             </li>
           </ul>
         </nav>
@@ -67,11 +68,9 @@ const menuItems = [
 
       <!-- Contenido principal -->
       <main class="flex-1 p-6 bg-gray-50 mt-4 ml-4 mr-4">
-        <h1 class="text-2xl font-bold text-gray-800">Contenido principal</h1>
-        <p class="mt-4 text-gray-600">
-          <FileUploader />
+        <RouterView></RouterView>
 
-        </p>
+       
       </main>
     </div>
   </div>
